@@ -5,13 +5,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ATL_WebUI.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace ATL_WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+
+        public HomeController(
+            UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
+            _userManager = userManager;
+            _roleManager = roleManager;
+        }
+        public async Task<IActionResult> Index()
+        {
+      
             return View();
         }
 
