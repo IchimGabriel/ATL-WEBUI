@@ -25,7 +25,7 @@ namespace ATL_WebUI.Services
         /// <returns>RETURN ALL CITIES IN NEO4J DB</returns>
         public async Task<List<City>> GetAllCitiesAsync()
         {
-            var response = await _httpClient.GetAsync("/api/city");
+            HttpResponseMessage response = await _httpClient.GetAsync("/api/cities");
 
             response.EnsureSuccessStatusCode();
 
