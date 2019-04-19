@@ -1,0 +1,58 @@
+﻿@model ShortestPathRequestView
+@{
+    ViewData["Title"] = "OnGet";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<br /><br />
+<div class="col-lg-6">
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>Shortest Path Request</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <section>
+                        <form id="shpath" method="post">
+                            <h6>Input Data</h6>
+                            <hr />
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="DepartureCity"></label>
+                                <input asp-for="DepartureCity" class="form-control" />
+                                <span asp-validation-for="DepartureCity" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ArrivalCity"></label>
+                                <input asp-for="ArrivalCity" class="form-control" />
+                                <span asp-validation-for="ArrivalCity" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Media"></label>
+                                <select asp-for="Media" asp-items="Html.ViewBag.Media" class="form-control">
+                                    <option>-- Select Media --</option>
+                                </select>
+                                @*<input asp-for="Media" class="form-control" />*@
+                                <span asp-validation-for="Media" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="NoNodes"></label>
+                                <input asp-for="NoNodes" class="form-control" />
+                                <span asp-validation-for="NoNodes" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" asp-action="OnPostAsync">Request</button>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

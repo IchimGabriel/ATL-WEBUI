@@ -50,7 +50,7 @@ namespace ATL_WebUI.Controllers
             if (ModelState.IsValid)
             {
                 city.Id = Guid.NewGuid();
-
+                
                 //_client.Add(city);
                 //await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Neighbours>
+@{
+    ViewData["Title"] = "Neighbours";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Neighbours</h1>
+
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-xl-3 col-md-4 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+
+                            @item.Values.Node <span>&nbsp; -- &nbsp;</span> @item.Values.Neighbour
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ShortestPath>
+@{
+    ViewData["Title"] = "OnPostAsync";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<hr />
+<h3>Routes for @ViewBag.Media shipments.</h3>
+<hr />
+<hr />
+<div id="myMap" style='position:relative;width:100%;height:100%;'>
+    <div class="">
+
+        @foreach (var item in Model)
+        {
+            <span>&nbsp; &nbsp;</span>
+            @item.Values.Cities[0].ToString()
+            <span>&nbsp; - &nbsp;</span>
+            @item.Values.Cities[@item.Values.Cities.Count - 1].ToString()
+
+            <div class="col-xl-6 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                @foreach (var itemv in item.Values.Cities)
+                                {
+                                    @itemv <span>&nbsp; &nbsp;</span>
+                                }
+                                <div></div>
+                                <br />
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    Distance:  @item.Values.TravelDistance  Km
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
