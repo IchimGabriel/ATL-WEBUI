@@ -5,16 +5,20 @@ using System.Threading.Tasks;
 using ATL_WebUI.Models;
 using ATL_WebUI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
 
 namespace ATL_WebUI.Controllers
 {
     public class CityController : Controller
     {
         private readonly INeo4jApiClient _client;
+        private readonly ILogger<City> _logger;
 
-        public CityController(INeo4jApiClient client)
+        public CityController(INeo4jApiClient client, ILogger<City> logger)
         {
             _client = client;
+            _logger = logger;
         }
         /// <summary>
         /// GET: Cities
@@ -34,6 +38,9 @@ namespace ATL_WebUI.Controllers
             return View(cities);
         }
 
+        [TempData]
+        public string ErrorMessage { get; set; }
+
         // GET: Cities/Create
         public IActionResult Create()
         {
@@ -45,17 +52,14 @@ namespace ATL_WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Name,Latitude,Longitude,iso,Port,Turnaround")] City city)
+        public async Task<IActionResult> Create([Bind("Name,Latitude,Longitude,iso,Port,Turnaround")] City city)
         {
             if (ModelState.IsValid)
             {
-                city.Id = Guid.NewGuid();
-                
-                //_client.Add(city);
-                //await _context.SaveChangesAsync();
+                await _client.CreateNode(city.Name, city.iso, city.Latitude, city.Longitude, city.Port, city.Turnaround);
                 return RedirectToAction(nameof(Index));
             }
-            return View(city);
+            return View();
         }
     }
 }

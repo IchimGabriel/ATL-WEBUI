@@ -21,7 +21,7 @@ namespace ATL_WebUI.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
       
             return View();

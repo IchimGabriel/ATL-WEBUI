@@ -8,9 +8,6 @@ namespace ATL_WebUI.Models
 {
     public class City
     {
-        [JsonProperty("id")]
-        public Guid Id { get; set; }
-
         [JsonProperty("name")]
         public string Name { get; set; }
 
