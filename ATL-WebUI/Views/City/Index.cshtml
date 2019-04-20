@@ -1,18 +1,10 @@
 ﻿@model IEnumerable<ATL_WebUI.Models.City>
-
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<h1>List of Cities</h1>
-<hr /><hr />
-
-<p>
-    <a asp-action="Create" class="btn btn-primary btn-lg">Create New</a>
-</p>
-<hr />
-<br />
+<h1>List of Cities</h1><hr /><hr />
+<p><a asp-action="Create" class="btn btn-primary btn-lg">Create City</a> | <a asp-action="CreateLink" class="btn btn-primary btn-lg">Create Link</a></p><hr /><br />
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Map Nodes</h6>
@@ -65,19 +57,11 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Turnaround)
                                 </td>
-                                @*<td>
-                                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                                    </td>*@
                             </tr>
                         }
                     </tbody>
                 </table>
             </div>
-
         </div>
-
     </div>
-
 </div>

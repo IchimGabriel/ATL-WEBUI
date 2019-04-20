@@ -18,7 +18,7 @@ namespace ATL_WebUI.Models
         public float Longitude { get; set; }
 
         [JsonProperty("iso")]
-        public string iso { get; set; }     // iso3 - IRL . GBR
+        public string iso { get; set; }     // iso3 - IRL . GBR . ROU .
 
         [JsonProperty("port_city")]
         public bool Port { get; set; }          // true or false

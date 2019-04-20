@@ -8,8 +8,6 @@ namespace ATL_WebUI.Models
 {
     public class Edge
     {
-        [JsonProperty("id")]
-        public int Id { get; set; }
         [JsonProperty("name")]
         public string Name { get; set; }    // TRUCK . TRAIN . SHIP . BARGE
         [JsonProperty("distance")]

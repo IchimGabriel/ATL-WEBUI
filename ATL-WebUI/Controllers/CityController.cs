@@ -31,6 +31,10 @@ namespace ATL_WebUI.Controllers
             return View(cities);
         }
 
+        /// <summary>
+        /// GET: Neighbours
+        /// </summary>
+        /// <returns>List of Neighbour city conected by truck</returns>
         [HttpGet]
         public async Task<IActionResult> GetNeighbours()
         {
@@ -41,15 +45,20 @@ namespace ATL_WebUI.Controllers
         [TempData]
         public string ErrorMessage { get; set; }
 
-        // GET: Cities/Create
+        /// <summary>
+        /// GET: City/Create
+        /// </summary>
+        /// <returns>Imput new City Parameters</returns>
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Cities/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST: City/Create
+        /// </summary>
+        /// <param name="city"></param>
+        /// <returns>Create new City / Node using POST -> return to List City</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,Latitude,Longitude,iso,Port,Turnaround")] City city)
@@ -57,6 +66,32 @@ namespace ATL_WebUI.Controllers
             if (ModelState.IsValid)
             {
                 await _client.CreateNode(city.Name, city.iso, city.Latitude, city.Longitude, city.Port, city.Turnaround);
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
+        }
+
+        /// <summary>
+        /// GET: City/CreateLink
+        /// </summary>
+        /// <returns>Imput form for Cities to link</returns>
+        public IActionResult CreateLink()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// POST: City/CreateLink
+        /// </summary>
+        /// <param name="link"></param>
+        /// <returns>Create new connection between two cities</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateLink([Bind("FromCity,ToCity,Media,Distance,Price,Speed,Emission")] CityLink link)
+        {
+            if (ModelState.IsValid)
+            {
+                await _client.CreateEdge(link.FromCity, link.ToCity, link.Media, link.Distance, link.Price, link.Emission,link.Speed) ;
                 return RedirectToAction(nameof(Index));
             }
             return View();

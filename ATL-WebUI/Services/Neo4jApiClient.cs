@@ -11,7 +11,7 @@ namespace ATL_WebUI.Services
         Task<List<ShortestPath>> GetSPath(string departure, string arrival, string medium, int nrnodes);
         Task<IEnumerable<Neighbours>> TruckConnectedCityNeighbours();
         Task<City> CreateNode(string city, string iso, float lat, float lng, bool is_port, int turnaround);
-        Task<Edge> CreateEdge(string fromCity, string toCity, string media, int distance, decimal price, float cotwo, int speed);
+        Task<CityLink> CreateEdge(string fromCity, string toCity, string media, int distance, decimal price, float cotwo, int speed);
     }
     public class Neo4jApiClient : INeo4jApiClient
     {
@@ -20,8 +20,6 @@ namespace ATL_WebUI.Services
         {
             _httpClient = httpClient;
         }
-
-      
 
         /// <summary>
         /// GET: All Nodes
@@ -89,11 +87,11 @@ namespace ATL_WebUI.Services
         /// <param name="cotwo"></param>
         /// <param name="speed"></param>
         /// <returns></returns>
-        public async Task<Edge> CreateEdge(string fromCity, string toCity, string media, int distance, decimal price, float cotwo, int speed)
+        public async Task<CityLink> CreateEdge(string fromCity, string toCity, string media, int distance, decimal price, float cotwo, int speed)
         {
             var response = await _httpClient.PostAsync("/api/create/edge/"+ fromCity +"/"+ toCity +"/"+ media +"/"+ distance +"/"+ price +"/"+ cotwo +"/"+ speed, null);
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsJsonAsync<Edge>();
+            return await response.Content.ReadAsJsonAsync<CityLink>();
         }
     }
 }
