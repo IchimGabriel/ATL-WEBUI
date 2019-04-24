@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h4>Roles</h4><hr />
+<div class="col-md-6 mb-6">
+    <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card-body">
+            <div class="col-md-12">
+                <table class="table table-light">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @item.Name
+                            </td>
+                        </tr>
+                    }
+                </table>
+                <hr />
+                <p>@Html.ActionLink("Add Role", "Create", "Role", null, new { @class = "btn btn-primary" })</p>
+            </div>
+        </div>
+    </div>
+</div>

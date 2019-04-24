@@ -23,7 +23,6 @@ namespace ATL_WebUI.Controllers
         }
         public IActionResult Index()
         {
-      
             return View();
         }
 
