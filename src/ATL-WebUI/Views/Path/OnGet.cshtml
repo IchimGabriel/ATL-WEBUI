@@ -6,16 +6,16 @@
 
 <br /><br />
 <div class="col-lg-6">
-    <div class="card mb-4">
+    <div class="card mb-6">
         <div class="card-header">
             <h4>Shortest Path Request</h4>
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <section>
                         <form id="shpath" method="post">
-                            <h6>Input Data</h6>
+                            <h6>City --> To City --> By Truck | Train | Ship | Barge</h6>
                             <hr />
                             <div asp-validation-summary="All" class="text-danger"></div>
                             <div class="form-group">
@@ -33,7 +33,6 @@
                                 <select asp-for="Media" asp-items="Html.ViewBag.Media" class="form-control">
                                     <option>-- Select Media --</option>
                                 </select>
-                                @*<input asp-for="Media" class="form-control" />*@
                                 <span asp-validation-for="Media" class="text-danger"></span>
                             </div>
                             <div class="form-group">

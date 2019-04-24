@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@ namespace ATL_WebUI.Models
 {
     public class Edge
     {
+        [Required]
         [JsonProperty("name")]
         public string Name { get; set; }    // TRUCK . TRAIN . SHIP . BARGE
         [JsonProperty("distance")]

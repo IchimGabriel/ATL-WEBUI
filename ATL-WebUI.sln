@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28809.33
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATL-WebUI", "ATL-WebUI\ATL-WebUI.csproj", "{8B1E1E16-42C2-42B0-BC28-BD7A51A70979}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATL-WebUI", "src\ATL-WebUI\ATL-WebUI.csproj", "{8B1E1E16-42C2-42B0-BC28-BD7A51A70979}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{1E8C70AF-0151-4CAF-9E74-6A777BE71A79}"
 EndProject
@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2BB45BF6-9FF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CD02D8E5-4C09-42C0-8514-41CAEB432FB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATL.WebUI.Tests", "ATL.WebUI.Tests\ATL.WebUI.Tests.csproj", "{BD91B933-C106-4EFC-BFC9-652FE2804E79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATL.WebUI.Tests", "tests\ATL.WebUI.Tests\ATL.WebUI.Tests.csproj", "{BD91B933-C106-4EFC-BFC9-652FE2804E79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

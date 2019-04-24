@@ -10,6 +10,7 @@ namespace ATL_WebUI.Models
     {
         [Key]
         public Guid Unit_Id { get; set; }
+        [Required]
         public string Name { get; set; }
     }
 }

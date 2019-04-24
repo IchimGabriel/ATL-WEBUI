@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@ namespace ATL_WebUI.Models
 {
     public class City
     {
+        [Required]
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -17,6 +19,7 @@ namespace ATL_WebUI.Models
         [JsonProperty("lng")]
         public float Longitude { get; set; }
 
+        [Required]
         [JsonProperty("iso")]
         public string iso { get; set; }     // iso3 - IRL . GBR . ROU .
 
