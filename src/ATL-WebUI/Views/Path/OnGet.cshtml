@@ -3,54 +3,48 @@
     ViewData["Title"] = "OnGet";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<br /><br />
-<div class="col-lg-6">
-    <div class="card mb-6">
-        <div class="card-header">
-            <h4>Shortest Path Request</h4>
-        </div>
+<hr />
+<h4 class="m-0 font-weight-bold text-primary">Shortest Path Request</h4><hr /><hr />
+<div class="col-md-6 mb-6">
+    <div class="card border-left-primary shadow h-100 py-2">
         <div class="card-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <section>
-                        <form id="shpath" method="post">
-                            <h6>City --> To City --> By Truck | Train | Ship | Barge</h6>
-                            <hr />
-                            <div asp-validation-summary="All" class="text-danger"></div>
-                            <div class="form-group">
-                                <label asp-for="DepartureCity"></label>
-                                <input asp-for="DepartureCity" class="form-control" />
-                                <span asp-validation-for="DepartureCity" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="ArrivalCity"></label>
-                                <input asp-for="ArrivalCity" class="form-control" />
-                                <span asp-validation-for="ArrivalCity" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Media"></label>
-                                <select asp-for="Media" asp-items="Html.ViewBag.Media" class="form-control">
-                                    <option>-- Select Media --</option>
-                                </select>
-                                <span asp-validation-for="Media" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="NoNodes"></label>
-                                <input asp-for="NoNodes" class="form-control" />
-                                <span asp-validation-for="NoNodes" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary" asp-action="OnPostAsync">Request</button>
-                            </div>
-                        </form>
-                    </section>
-                </div>
+            <div class="col-md-12">
+                <section>
+                    <form id="shpath" method="post">
+                        <h6 class="m-0 font-weight-bold text-primary">City --> To City --> By Truck | Train | Ship | Barge</h6>
+                        <hr />
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="DepartureCity"></label>
+                            <input asp-for="DepartureCity" class="form-control" />
+                            <span asp-validation-for="DepartureCity" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ArrivalCity"></label>
+                            <input asp-for="ArrivalCity" class="form-control" />
+                            <span asp-validation-for="ArrivalCity" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Media"></label>
+                            <select asp-for="Media" asp-items="Html.ViewBag.Media" class="form-control">
+                                <option>-- Select Media --</option>
+                            </select>
+                            <span asp-validation-for="Media" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="NoNodes"></label>
+                            <input asp-for="NoNodes" class="form-control" />
+                            <span asp-validation-for="NoNodes" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" asp-action="OnPostAsync">Request</button>
+                        </div>
+                    </form>
+                </section>
             </div>
         </div>
     </div>
 </div>
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

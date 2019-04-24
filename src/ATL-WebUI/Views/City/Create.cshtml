@@ -2,52 +2,55 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h4>Add City / Node to Map</h4><hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+<hr />
+<h4 class="m-0 font-weight-bold text-primary">Add City to Map</h4><hr /><hr />
+<div class="col-md-6 mb-6">
+    <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card-body">
+            <div class="col-md-12">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Latitude" class="control-label"></label>
+                        <input asp-for="Latitude" class="form-control" />
+                        <span asp-validation-for="Latitude" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Longitude" class="control-label"></label>
+                        <input asp-for="Longitude" class="form-control" />
+                        <span asp-validation-for="Longitude" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="iso" class="control-label"></label>
+                        <input asp-for="iso" class="form-control" />
+                        <span asp-validation-for="iso" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Port" /> @Html.DisplayNameFor(model => model.Port)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Turnaround" class="control-label"></label>
+                        <input asp-for="Turnaround" class="form-control" />
+                        <span asp-validation-for="Turnaround" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+                <div>
+                    <a asp-action="Index">Back to List</a>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Latitude" class="control-label"></label>
-                <input asp-for="Latitude" class="form-control" />
-                <span asp-validation-for="Latitude" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Longitude" class="control-label"></label>
-                <input asp-for="Longitude" class="form-control" />
-                <span asp-validation-for="Longitude" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="iso" class="control-label"></label>
-                <input asp-for="iso" class="form-control" />
-                <span asp-validation-for="iso" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Port" /> @Html.DisplayNameFor(model => model.Port)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Turnaround" class="control-label"></label>
-                <input asp-for="Turnaround" class="form-control" />
-                <span asp-validation-for="Turnaround" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

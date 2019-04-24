@@ -11,16 +11,6 @@ namespace ATL_WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-
-        public HomeController(
-            UserManager<IdentityUser> userManager,
-            RoleManager<IdentityRole> roleManager)
-        {
-            _userManager = userManager;
-            _roleManager = roleManager;
-        }
         public IActionResult Index()
         {
             return View();
