@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<hr />
+<h4 class="m-0 font-weight-bold text-primary">Users</h4><hr /><hr />
+<p><a asp-action="Create" class="btn btn-primary btn-lg">Add User</a></p><hr /><br />
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">All Application Users</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="dataTables_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <table class="table table-bordered" id="dataTable" cellspacing="0">
+                    <thead>
+                        <tr role="row">
+                            <th>
+                                User Name
+                            </th>
+                            <th>
+                                Email Address
+                            </th>
+                            <th>
+                                Phone Number
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UserName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

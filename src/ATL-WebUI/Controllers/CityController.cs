@@ -13,12 +13,10 @@ namespace ATL_WebUI.Controllers
     public class CityController : Controller
     {
         private readonly INeo4jApiClient _client;
-        private readonly ILogger<City> _logger;
 
-        public CityController(INeo4jApiClient client, ILogger<City> logger)
+        public CityController(INeo4jApiClient client)
         {
             _client = client;
-            _logger = logger;
         }
         /// <summary>
         /// GET: Cities
