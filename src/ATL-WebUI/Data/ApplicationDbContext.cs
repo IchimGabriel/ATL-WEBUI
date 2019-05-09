@@ -17,5 +17,9 @@ namespace ATL_WebUI.Data
         }
         public DbSet<Container> Containers { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Detail> Details { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Route> Routes { get; set; }
+        public DbSet<Shipment> Shipments { get; set; }
     }
 }
