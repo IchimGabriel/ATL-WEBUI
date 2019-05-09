@@ -18,7 +18,7 @@ namespace ATL_WebUI.Services
         //[Get("/api/addresses")]
         //Task<List<Address>> GetAllAddressesAsync();
 
-        [Get("/api/containers")]
+        [Get("/containers")]
         Task<List<Container>> GetAllContainersAsync(); 
     }
 }

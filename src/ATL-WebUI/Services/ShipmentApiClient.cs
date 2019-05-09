@@ -10,12 +10,10 @@ namespace ATL_WebUI.Services
     public class ShipmentApiClient : IShipmentApiClient
     {
         private readonly HttpClient _httpClient;
-        //private readonly IHttpClientFactory _clientFactory;
-
+        
         public ShipmentApiClient(HttpClient client)
         {
             _httpClient = client;
-            //_clientFactory = clientFactory;
         }
         public Task<List<Address>> GetAllAddressesAsync()
         {
@@ -24,11 +22,7 @@ namespace ATL_WebUI.Services
 
         public async Task<List<Container>> GetAllContainersAsync()
         {
-            //var request = new HttpRequestMessage(HttpMethod.Get,"/api/containers");
-            //var client = _clientFactory.CreateClient("sql");
-            //var response = await client.SendAsync(request);
-
-            var response = await _httpClient.GetAsync("/api/containers");
+            var response = await _httpClient.GetAsync("/containers");
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsJsonAsync<List<Container>>();
         }

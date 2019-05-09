@@ -16,6 +16,6 @@ namespace ATL_WebUI.Data
         {
         }
         public DbSet<Container> Containers { get; set; }
-        public DbSet<ATL_WebUI.Models.SQL.Address> Address { get; set; }
+        public DbSet<Address> Addresses { get; set; }
     }
 }

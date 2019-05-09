@@ -5,62 +5,71 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.User_Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Field_1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Field_2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Zip)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Country)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.User_Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Field_1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Field_2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Zip)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Address_Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Address_Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Address_Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<hr />
+<h4 class="m-0 font-weight-bold text-primary">Address List</h4><hr /><hr />
+<p>@Html.ActionLink("Create New", "Create", "Addresses", null, new { @class = "btn btn-primary" })</p><br />
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Dispatch Warehouse Locations</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="dataTables_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <table class="table table-bordered" id="dataTable" cellspacing="0">
+                    <thead>
+                        <tr role="row">
+                            <th>
+                                @Html.DisplayNameFor(model => model.User_Id)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Field_1)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Field_2)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.City)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Zip)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Country)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.User_Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Field_1)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Field_2)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.City)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Zip)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Country)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Address_Id">Edit</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.Address_Id">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

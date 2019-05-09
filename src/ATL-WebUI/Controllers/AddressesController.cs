@@ -22,7 +22,7 @@ namespace ATL_WebUI.Controllers
         // GET: Addresses
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Address.ToListAsync());
+            return View(await _context.Addresses.ToListAsync());
         }
 
         // GET: Addresses/Details/5
@@ -33,7 +33,7 @@ namespace ATL_WebUI.Controllers
                 return NotFound();
             }
 
-            var address = await _context.Address
+            var address = await _context.Addresses
                 .FirstOrDefaultAsync(m => m.Address_Id == id);
             if (address == null)
             {
@@ -74,7 +74,7 @@ namespace ATL_WebUI.Controllers
                 return NotFound();
             }
 
-            var address = await _context.Address.FindAsync(id);
+            var address = await _context.Addresses.FindAsync(id);
             if (address == null)
             {
                 return NotFound();
@@ -125,7 +125,7 @@ namespace ATL_WebUI.Controllers
                 return NotFound();
             }
 
-            var address = await _context.Address
+            var address = await _context.Addresses
                 .FirstOrDefaultAsync(m => m.Address_Id == id);
             if (address == null)
             {
@@ -140,15 +140,15 @@ namespace ATL_WebUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var address = await _context.Address.FindAsync(id);
-            _context.Address.Remove(address);
+            var address = await _context.Addresses.FindAsync(id);
+            _context.Addresses.Remove(address);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AddressExists(Guid id)
         {
-            return _context.Address.Any(e => e.Address_Id == id);
+            return _context.Addresses.Any(e => e.Address_Id == id);
         }
     }
 }
