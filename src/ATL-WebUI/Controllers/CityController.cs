@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ATL_WebUI.Models;
 using ATL_WebUI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
@@ -22,7 +23,7 @@ namespace ATL_WebUI.Controllers
         /// GET: Cities
         /// </summary>
         /// <returns>List of all CITIES in Neo4j DB</returns>
-
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var cities = await _client.GetAllCitiesAsync();

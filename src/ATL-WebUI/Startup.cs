@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Refit;
 using System.Net.Http;
 
 namespace ATL_WebUI
@@ -41,13 +42,11 @@ namespace ATL_WebUI
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddScoped(_ =>
-                new HttpClient
-                {
-                    BaseAddress = new Uri(Configuration["serviceUrl"])
-                });
-            services.AddScoped<INeo4jApiClient, Neo4jApiClient>();
-
+            services.AddHttpClient("neo4j", c => c.BaseAddress = new Uri(Configuration["mapApiUrl"]))
+                .AddTypedClient(c => RestService.For<INeo4jApiClient>(c));
+            services.AddHttpClient("sql", c => c.BaseAddress = new Uri(Configuration["shipmentApiUrl"]))
+                .AddTypedClient(c => RestService.For<IShipmentApiClient>(c)); ;
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -63,10 +62,10 @@ namespace ATL_WebUI
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                //app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 

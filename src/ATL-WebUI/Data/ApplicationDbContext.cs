@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ATL_WebUI.Models;
+using Container = ATL_WebUI.Models.SQL.Container;
+using ATL_WebUI.Models.SQL;
 
 namespace ATL_WebUI.Data
 {
@@ -12,5 +15,7 @@ namespace ATL_WebUI.Data
             : base(options)
         {
         }
+        public DbSet<Container> Containers { get; set; }
+        public DbSet<ATL_WebUI.Models.SQL.Address> Address { get; set; }
     }
 }

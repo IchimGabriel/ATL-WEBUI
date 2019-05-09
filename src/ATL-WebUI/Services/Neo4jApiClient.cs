@@ -1,4 +1,5 @@
 ﻿using ATL_WebUI.Models;
+using Refit;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -7,12 +8,22 @@ namespace ATL_WebUI.Services
 {
     public interface INeo4jApiClient
     {
+        [Get("/api/cities")]
         Task<List<City>> GetAllCitiesAsync();
-        Task<List<ShortestPath>> GetSPath(string departure, string arrival, string medium, int nrnodes);
+
+        [Get("/api/spath/{departure}/{arrival}/{media}/{nrnodes}")]
+        Task<List<ShortestPath>> GetSPath(string departure, string arrival, string media, int nrnodes); 
+
+        [Get("/api/neighbours")]
         Task<IEnumerable<Neighbours>> TruckConnectedCityNeighbours();
+
+        [Post("/api/create/{city}/{iso}/{lat}/{lng}/{is_port}/{turnaround}")]
         Task<City> CreateNode(string city, string iso, float lat, float lng, bool is_port, int turnaround);
+
+        [Post("/api/create/edge/{fromCity}/{toCity}/{media}/{distance}/{price}/{cotwo}/{speed}")]
         Task<CityLink> CreateEdge(string fromCity, string toCity, string media, int distance, decimal price, float cotwo, int speed);
     }
+
     public class Neo4jApiClient : INeo4jApiClient
     {
         private readonly HttpClient _httpClient;
@@ -42,7 +53,7 @@ namespace ATL_WebUI.Services
         /// <returns></returns>
         public async Task<List<ShortestPath>> GetSPath(string departure, string arrival, string media, int nrnodes)
         {
-            var response = await _httpClient.GetAsync("/api/spath/"+ departure +"/"+ arrival +"/"+ media +"/"+ nrnodes);
+            var response = await _httpClient.GetAsync("/api/spath/" + departure +"/"+ arrival +"/"+ media +"/"+ nrnodes);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsJsonAsync<List<ShortestPath>>();
         }
@@ -71,7 +82,7 @@ namespace ATL_WebUI.Services
         /// <returns></returns>
         public async Task<City> CreateNode(string city, string iso, float lat, float lng, bool is_port, int turnaround)
         {
-            var response = await _httpClient.PostAsync("/api/create/"+ city +"/"+ iso +"/"+ lat +"/"+ lng +"/"+ is_port +"/"+ turnaround, null);
+            var response = await _httpClient.PostAsync("/api/create/" + city +"/"+ iso +"/"+ lat +"/"+ lng +"/"+ is_port +"/"+ turnaround, null);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsJsonAsync<City>();
         }
@@ -89,7 +100,7 @@ namespace ATL_WebUI.Services
         /// <returns></returns>
         public async Task<CityLink> CreateEdge(string fromCity, string toCity, string media, int distance, decimal price, float cotwo, int speed)
         {
-            var response = await _httpClient.PostAsync("/api/create/edge/"+ fromCity +"/"+ toCity +"/"+ media +"/"+ distance +"/"+ price +"/"+ cotwo +"/"+ speed, null);
+            var response = await _httpClient.PostAsync("/api/create/edge/" + fromCity +"/"+ toCity +"/"+ media +"/"+ distance +"/"+ price +"/"+ cotwo +"/"+ speed, null);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsJsonAsync<CityLink>();
         }

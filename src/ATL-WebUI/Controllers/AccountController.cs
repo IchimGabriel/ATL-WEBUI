@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using ATL_WebUI.Data;
-using ATL_WebUI.Models;
+using ATL_WebUI.Models.SQL;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
