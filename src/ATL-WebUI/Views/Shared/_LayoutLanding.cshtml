@@ -4,7 +4,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@ViewData["Title"] - ATL-FF</title>
-
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     </environment>
@@ -14,31 +13,109 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
     </environment>
+    <link type="text/css" rel="stylesheet" href="~/css/site.css" />
+    <style>
+        * {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
 
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#notfound {
+  position: relative;
+  height: 80vh;
+}
+
+#notfound .notfound {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.notfound {
+  max-width: 520px;
+  width: 100%;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.notfound .notfound-404 {
+  position: relative;
+  height: 240px;
+}
+
+.notfound .notfound-404 h1 {
+  font-family: 'Montserrat', sans-serif;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: 252px;
+  font-weight: 900;
+  margin: 0px;
+  color: #262626;
+  text-transform: uppercase;
+  letter-spacing: -40px;
+  margin-left: -20px;
+}
+
+.notfound .notfound-404 h1>span {
+  text-shadow: -8px 0px 0px #fff;
+}
+
+.notfound .notfound-404 h3 {
+  font-family: 'Cabin', sans-serif;
+  position: relative;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #262626;
+  margin: 0px;
+  letter-spacing: 3px;
+  padding-left: 6px;
+}
+
+.notfound h2 {
+  font-family: 'Cabin', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #000;
+  margin-top: 0px;
+  margin-bottom: 25px;
+}
+    </style>
+    <!-- Google font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cabin:400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:900">
     <!-- Custom fonts for this template-->
     <link rel="stylesheet" type="text/css" href="~/vendor/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="~/css/sb-admin-2.min.css">
-    <link rel="stylesheet" href="~/css/site.css" />
+
 </head>
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
-
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-area="" asp-controller="Home" asp-action="Index">
                 <img src="~/img/logowhite.png" alt="ATL-FF Logo" style="width: 40px" />
                 <div class="sidebar-brand-text mx-3">ATL-FF</div>
             </a>
-
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-
             <!-- Nav Item - Home -->
             <li class="nav-item active">
                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
@@ -46,114 +123,35 @@
                     <span>Home</span>
                 </a>
             </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider">
-
-            <!-- Heading -->
-
-            @if (User.Identity.IsAuthenticated)
-            {
-                @if (User.IsInRole("Admin"))
-                {
-
-                    <div class="sidebar-heading">
-                        Neo4J
-                    </div>
-
-                    <li class="nav-item active">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                            <i class="fas fa-fw fa-cog"></i>
-                            <span>Cities</span>
-                        </a>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header"></h6>
-                                <a class="collapse-item" asp-area="" asp-controller="City" asp-action="Index">List All</a>
-                                <a class="collapse-item" asp-area="" asp-controller="City" asp-action="GetNeighbours">Neighbours</a>
-                                <a class="collapse-item" asp-area="" asp-controller="Path" asp-action="OnGet">Request Route</a>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!-- Nav Item - Pages Collapse Menu Cities -->
-                    <!-- Divider -->
-                    <hr class="sidebar-divider">
-
-                    <!-- Heading -->
-                    <div class="sidebar-heading">
-                        SQL
-                    </div>
-
-                    <!-- Nav Item - Pages Collapse Menu Users -->
-                    <li class="nav-item active">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1" aria-expanded="true" aria-controls="collapsePages1">
-                            <i class="fas fa-fw fa-folder"></i>
-                            <span>Users</span>
-                        </a>
-                        <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <a class="collapse-item" asp-area="" asp-controller="Role" asp-action="Index">Roles</a>
-                                <a class="collapse-item" asp-area="" asp-controller="Account" asp-action="Index">Users</a>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!-- Nav Item - Pages Collapse Menu Shipments -->
-                    <li class="nav-item active">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                            <i class="fas fa-fw fa-folder"></i>
-                            <span>Shipments</span>
-                        </a>
-                        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <a class="collapse-item" asp-area="" asp-controller="Shipments" asp-action="Index">Shipment's List</a>
-                                <a class="collapse-item" asp-area="" asp-controller="Containers" asp-action="Index">Container's List</a>
-                                <a class="collapse-item" asp-area="" asp-controller="Addresses" asp-action="Index">Dispatch Locations</a>
-                                <a class="collapse-item" asp-area="" asp-controller="Home" asp-action="Index">Failure</a>
-                                <a class="collapse-item" asp-area="" asp-controller="Home" asp-action="Index">Returned</a>
-                            </div>
-                        </div>
-                    </li>
-                }
-            }
-
-
-            <!-- Nav Item - Charts -->
+            <!-- Nav Item -Contact -->
             <li class="nav-item active">
-                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span>
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">
+                    <i class="fas fa-fw fa-phone-volume"></i>
+                    <span>Contact</span>
                 </a>
             </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
-
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
         </ul>
         <!-- End of Sidebar -->
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
             <!-- Main Content -->
             <div id="content">
-
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-gradient-primary topbar mb-4 static-top shadow">
-
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -174,7 +172,6 @@
                             </div>
                         </li>
                         <div class="topbar-divider d-none d-sm-block"></div>
-
                         <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                             <partial name="_LoginPartial" />
                         </div>
@@ -187,7 +184,6 @@
                         @RenderBody()
                     </main>
                 </div>
-
             </div>
             <!-- End of Main Content -->
             <!-- Footer -->
@@ -201,8 +197,6 @@
                 </div>
             </footer>
             <!-- End of Footer -->
-
-
         </div>
         <!-- End of Content Wrapper -->
     </div>
@@ -211,26 +205,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
@@ -249,35 +223,11 @@
                 integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
         </script>
     </environment>
-
     <!-- Core plugin JavaScript-->
     <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
-
     <!-- Custom scripts for all pages-->
     <script src="~/js/sb-admin-2.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[]' async defer></script>
-    <script type='text/javascript'>
-        function GetMap() {
-            //var map = new Microsoft.Maps.Map('#myMap', {
-            //    credentials: '',
-            //    center: new Microsoft.Maps.Location(51.50632, -0.12714),
-
-            //    mapTypeId: Microsoft.Maps.MapTypeId.grayscale,
-            //    zoom: 5
-            //});
-
-            //Add your post map load code here.
-        }
-    </script>
-    <!--Page level plugins-- >
-    <script src="~/vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    @*<script src="~/js/chart-area-demo.js"></script>
-        <script src="~/js/chart-pie-demo.js"></script>*@
-
     @RenderSection("Scripts", required: false)
 </body>
 </html>

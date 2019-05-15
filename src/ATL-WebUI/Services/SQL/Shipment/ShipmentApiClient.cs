@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using ATL_WebUI.Models.SQL;
+using Microsoft.AspNetCore.Mvc;
+using Refit;
 
 namespace ATL_WebUI.Services
 {
@@ -15,16 +17,28 @@ namespace ATL_WebUI.Services
         {
             _httpClient = client;
         }
-        public Task<List<Address>> GetAllAddressesAsync()
-        {
-            throw new NotImplementedException();
-        }
+
+        
 
         public async Task<List<Container>> GetAllContainersAsync()
         {
             var response = await _httpClient.GetAsync("/containers");
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsJsonAsync<List<Container>>();
+        }
+
+        public async Task<Container> EditContainer(Guid? id)
+        {
+            var response = await _httpClient.GetAsync("/containers/" + id);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsJsonAsync<Container>();
+        }
+
+        public async Task<Container> SaveEdit(Guid? id, [Body]Container container)
+        {
+            var response = await _httpClient.PutAsync("/containers/" + id, null);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsJsonAsync<Container>();
         }
     }
 }

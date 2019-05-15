@@ -51,73 +51,43 @@
             <hr class="sidebar-divider">
 
             <!-- Heading -->
+            <div class="sidebar-heading">
+                Destinations
+            </div>
 
-            @if (User.Identity.IsAuthenticated)
-            {
-                @if (User.IsInRole("Admin"))
-                {
+            <!-- Nav Item - Home -->
+            <li class="nav-item active">
+                <a class="nav-link" asp-area="" asp-controller="City" asp-action="Index">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Home</span>
+                </a>
+            </li>
 
-                    <div class="sidebar-heading">
-                        Neo4J
+            
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                SQL
+            </div>
+            <!-- Nav Item - Pages Collapse Menu Shipments -->
+            <li class="nav-item active">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Shipments</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" asp-area="" asp-controller="Shipments" asp-action="Index">Shipment's List</a>
+                        <a class="collapse-item" asp-area="" asp-controller="Containers" asp-action="Index">Container's List</a>
+                        <a class="collapse-item" asp-area="" asp-controller="Addresses" asp-action="Index">Dispatch Locations</a>
+                        <a class="collapse-item" asp-area="" asp-controller="Home" asp-action="Index">Failure</a>
+                        <a class="collapse-item" asp-area="" asp-controller="Home" asp-action="Index">Returned</a>
                     </div>
-
-                    <li class="nav-item active">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                            <i class="fas fa-fw fa-cog"></i>
-                            <span>Cities</span>
-                        </a>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header"></h6>
-                                <a class="collapse-item" asp-area="" asp-controller="City" asp-action="Index">List All</a>
-                                <a class="collapse-item" asp-area="" asp-controller="City" asp-action="GetNeighbours">Neighbours</a>
-                                <a class="collapse-item" asp-area="" asp-controller="Path" asp-action="OnGet">Request Route</a>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!-- Nav Item - Pages Collapse Menu Cities -->
-                    <!-- Divider -->
-                    <hr class="sidebar-divider">
-
-                    <!-- Heading -->
-                    <div class="sidebar-heading">
-                        SQL
-                    </div>
-
-                    <!-- Nav Item - Pages Collapse Menu Users -->
-                    <li class="nav-item active">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1" aria-expanded="true" aria-controls="collapsePages1">
-                            <i class="fas fa-fw fa-folder"></i>
-                            <span>Users</span>
-                        </a>
-                        <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <a class="collapse-item" asp-area="" asp-controller="Role" asp-action="Index">Roles</a>
-                                <a class="collapse-item" asp-area="" asp-controller="Account" asp-action="Index">Users</a>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!-- Nav Item - Pages Collapse Menu Shipments -->
-                    <li class="nav-item active">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                            <i class="fas fa-fw fa-folder"></i>
-                            <span>Shipments</span>
-                        </a>
-                        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <a class="collapse-item" asp-area="" asp-controller="Shipments" asp-action="Index">Shipment's List</a>
-                                <a class="collapse-item" asp-area="" asp-controller="Containers" asp-action="Index">Container's List</a>
-                                <a class="collapse-item" asp-area="" asp-controller="Addresses" asp-action="Index">Dispatch Locations</a>
-                                <a class="collapse-item" asp-area="" asp-controller="Home" asp-action="Index">Failure</a>
-                                <a class="collapse-item" asp-area="" asp-controller="Home" asp-action="Index">Returned</a>
-                            </div>
-                        </div>
-                    </li>
-                }
-            }
-
+                </div>
+            </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item active">

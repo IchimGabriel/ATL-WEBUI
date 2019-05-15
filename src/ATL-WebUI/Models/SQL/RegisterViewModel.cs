@@ -9,6 +9,7 @@ namespace ATL_WebUI.Models.SQL
     public class RegisterViewModel
     {
         [Required]
+        [EmailAddress]
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 

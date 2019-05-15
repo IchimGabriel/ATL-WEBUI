@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ATL_WebUI.Data;
 using ATL_WebUI.Models.SQL;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ATL_WebUI.Controllers
 {
@@ -20,9 +21,17 @@ namespace ATL_WebUI.Controllers
         }
 
         // GET: Shipments
+        [Authorize(Roles = "Admin, Broker")]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Shipments.ToListAsync());
+            var list = await _context.Shipments.ToListAsync();
+
+            if (!User.Identity.IsAuthenticated && (!User.IsInRole("Admin") || !User.IsInRole("Broker")))
+            {
+                return RedirectToAction("PageUnauthorise", "Home");
+            }
+           
+            return View(list);
         }
 
         // GET: Shipments/Details/5

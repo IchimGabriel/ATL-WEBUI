@@ -8,9 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using ATL_WebUI.Data;
 using ATL_WebUI.Models.SQL;
 using ATL_WebUI.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace ATL_WebUI.Controllers
 {
+    [Produces("application/json")]
+    [Authorize(Roles = "Admin, Broker")]
     public class ContainersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,13 +27,24 @@ namespace ATL_WebUI.Controllers
             _client = client;
         }
 
+        /// <summary>
+        /// Implements the API - Route => api/containers
+        /// </summary>
+        /// <returns></returns>
         // GET: Containers
+        
+        
         public async Task<IActionResult> Index()
         {
-            return View(await _client.GetAllContainersAsync());
+            if (User.Identity.IsAuthenticated || User.IsInRole("Admin"))
+            {
+                return View(await _client.GetAllContainersAsync()); 
+            }
+            
+            return Unauthorized();
         }
 
-        //GET: Containers/Details/5
+        //GET: Containers/Details/3af6eb9b-bf45-46e9-94c5-26e6ad69ecf2
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -57,7 +73,7 @@ namespace ATL_WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Unit_Id,Name")] Container container)
+        public async Task<IActionResult> Create([Bind("Unit_Id,Name, Description")] Container container)
         {
             if (ModelState.IsValid)
             {
@@ -68,8 +84,8 @@ namespace ATL_WebUI.Controllers
             }
             return View(container);
         }
-
-        // GET: Containers/Edit/5
+  
+        // GET: Containers/Edit/3af6eb9b-bf45-46e9-94c5-26e6ad69ecf2
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -77,7 +93,8 @@ namespace ATL_WebUI.Controllers
                 return NotFound();
             }
 
-            var container = await _context.Containers.FindAsync(id);
+            var container = await _client.EditContainer(id);
+
             if (container == null)
             {
                 return NotFound();
@@ -85,12 +102,12 @@ namespace ATL_WebUI.Controllers
             return View(container);
         }
 
-        // POST: Containers/Edit/5
+        // POST: Containers/Edit/3af6eb9b-bf45-46e9-94c5-26e6ad69ecf2
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Unit_Id,Name")] Container container)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Unit_Id,Name, Description")] Container container)
         {
             if (id != container.Unit_Id)
             {
@@ -101,8 +118,7 @@ namespace ATL_WebUI.Controllers
             {
                 try
                 {
-                    _context.Update(container);
-                    await _context.SaveChangesAsync();
+                    await _client.SaveEdit(container.Unit_Id, container);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -120,7 +136,7 @@ namespace ATL_WebUI.Controllers
             return View(container);
         }
 
-        // GET: Containers/Delete/5
+        // GET: Containers/Delete/3af6eb9b-bf45-46e9-94c5-26e6ad69ecf2
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -138,7 +154,7 @@ namespace ATL_WebUI.Controllers
             return View(container);
         }
 
-        // POST: Containers/Delete/5
+        // POST: Containers/Delete/3af6eb9b-bf45-46e9-94c5-26e6ad69ecf2
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)

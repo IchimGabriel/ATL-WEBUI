@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using ATL_WebUI.Models.SQL;
 using Refit;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ATL_WebUI.Services
 {
@@ -19,6 +20,12 @@ namespace ATL_WebUI.Services
         //Task<List<Address>> GetAllAddressesAsync();
 
         [Get("/containers")]
-        Task<List<Container>> GetAllContainersAsync(); 
+        Task<List<Container>> GetAllContainersAsync();
+
+        [Get("/containers/{id}")]
+        Task<Container> EditContainer(Guid? id);
+
+        [Put("/containers/{id}")]
+        Task<Container> SaveEdit(Guid? id, [Body]Container container);
     }
 }
