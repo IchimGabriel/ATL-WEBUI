@@ -15,33 +15,28 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Customer_Id" class="control-label"></label>
-                <input asp-for="Customer_Id" class="form-control" />
+                <select asp-for="Customer_Id" asp-items="@(new SelectList(ViewBag.Users, "Id", "UserName"))" class="form-control"></select>
                 <span asp-validation-for="Customer_Id" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Employee_Id" class="control-label"></label>
-                <input asp-for="Employee_Id" class="form-control" />
+                <select asp-for="Employee_Id" asp-items="@(new SelectList(ViewBag.Users, "Id", "UserName"))" class="form-control"></select>
                 <span asp-validation-for="Employee_Id" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <select asp-for="Status" class="form-control"></select>
+                <label asp-for="Status" asp-action="IndexEnum" class="control-label"></label>
+                <select asp-for="Status" asp-items="Html.GetEnumSelectList(typeof(ATL_WebUI.Models.SQL.Statuses))" class="form-control"></select> 
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Address_From_Id" class="control-label"></label>
-                <input asp-for="Address_From_Id" class="form-control" />
+                <select asp-for="Address_From_Id" asp-items="@(new SelectList(ViewBag.Addresses, "Address_Id", "City"))" class="form-control"></select>
                 <span asp-validation-for="Address_From_Id" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Address_To_Id" class="control-label"></label>
-                <input asp-for="Address_To_Id" class="form-control" />
+                <select asp-for="Address_To_Id" asp-items="@(new SelectList(ViewBag.Addresses, "Address_Id", "City"))" class="form-control"></select>
                 <span asp-validation-for="Address_To_Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Created_Date" class="control-label"></label>
-                <input asp-for="Created_Date" class="form-control" />
-                <span asp-validation-for="Created_Date" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Departure_Date" class="control-label"></label>
@@ -54,13 +49,8 @@
                 <span asp-validation-for="Arrival_Date" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Total_Price" class="control-label"></label>
-                <input asp-for="Total_Price" class="form-control" />
-                <span asp-validation-for="Total_Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Route_Id" class="control-label"></label>
-                <input asp-for="Route_Id" class="form-control" />
+                <select asp-for="Route_Id" asp-items="@(new SelectList(ViewBag.Routes, "Route_Id", "RouteName"))" class="form-control"></select>
                 <span asp-validation-for="Route_Id" class="text-danger"></span>
             </div>
             <div class="form-group">

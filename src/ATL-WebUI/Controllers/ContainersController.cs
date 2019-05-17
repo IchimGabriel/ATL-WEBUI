@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using ATL_WebUI.Data;
+﻿using ATL_WebUI.Data;
 using ATL_WebUI.Models.SQL;
 using ATL_WebUI.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ATL_WebUI.Controllers
 {
@@ -32,15 +28,15 @@ namespace ATL_WebUI.Controllers
         /// </summary>
         /// <returns></returns>
         // GET: Containers
-        
-        
+
+
         public async Task<IActionResult> Index()
         {
             if (User.Identity.IsAuthenticated || User.IsInRole("Admin"))
             {
-                return View(await _client.GetAllContainersAsync()); 
+                return View(await _client.GetAllContainersAsync());
             }
-            
+
             return Unauthorized();
         }
 
@@ -84,7 +80,7 @@ namespace ATL_WebUI.Controllers
             }
             return View(container);
         }
-  
+
         // GET: Containers/Edit/3af6eb9b-bf45-46e9-94c5-26e6ad69ecf2
         public async Task<IActionResult> Edit(Guid? id)
         {

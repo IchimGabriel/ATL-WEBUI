@@ -2,17 +2,14 @@
 using ATL_WebUI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using Refit;
-using System.Net.Http;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using System;
 
 namespace ATL_WebUI
 {
@@ -64,7 +61,7 @@ namespace ATL_WebUI
                 .AddTypedClient(c => RestService.For<INeo4jApiClient>(c));
             services.AddHttpClient("sql", c => c.BaseAddress = new Uri(Configuration["shipmentApiUrl"]))
                 .AddTypedClient(c => RestService.For<IShipmentApiClient>(c)); ;
-            
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -73,7 +70,7 @@ namespace ATL_WebUI
         {
             if (env.IsDevelopment())
             {
-                
+
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 //app.UseExceptionHandler("/404");
@@ -114,7 +111,7 @@ namespace ATL_WebUI
 
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
-            
+
             app.UseCookiePolicy();
 
             app.UseAuthentication();

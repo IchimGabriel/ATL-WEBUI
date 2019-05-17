@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ATL_WebUI.Data;
-using Microsoft.AspNetCore.Http;
+﻿using ATL_WebUI.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ATL_WebUI.Controllers
 {
@@ -31,14 +28,14 @@ namespace ATL_WebUI.Controllers
 
         // GET: Role/Create
         public ActionResult Create()
-        { 
+        {
             return View();
         }
 
         // POST: Role/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task <ActionResult> Create(IdentityRole role)
+        public async Task<ActionResult> Create(IdentityRole role)
         {
             try
             {

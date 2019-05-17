@@ -40,5 +40,5 @@ namespace ATL_WebUI.Models
     {
         public List<string> Cities { get; set; }
         public int TravelDistance { get; set; }
-    }  
+    }
 }

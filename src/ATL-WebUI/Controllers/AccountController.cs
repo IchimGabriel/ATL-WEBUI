@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using ATL_WebUI.Data;
+﻿using ATL_WebUI.Data;
 using ATL_WebUI.Models.SQL;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ATL_WebUI.Controllers
 {
@@ -14,7 +14,7 @@ namespace ATL_WebUI.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        public AccountController(ApplicationDbContext context, 
+        public AccountController(ApplicationDbContext context,
             UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager)
         {
@@ -34,7 +34,7 @@ namespace ATL_WebUI.Controllers
         public ActionResult Create()
         {
             var roles = _context.Roles.ToList();
-            ViewBag.Name = new SelectList(roles,"Name","Name");
+            ViewBag.Name = new SelectList(roles, "Name", "Name");
             return View();
         }
 
@@ -49,7 +49,7 @@ namespace ATL_WebUI.Controllers
                 {
                     var user = new IdentityUser { Id = Guid.NewGuid().ToString(), UserName = model.UserName, Email = model.Email, PhoneNumber = model.Phone };
                     var result = await _userManager.CreateAsync(user, model.Password);
-                   
+
                     if (result.Succeeded)
                     {
                         var role = await _userManager.FindByEmailAsync(model.Email);
@@ -59,7 +59,7 @@ namespace ATL_WebUI.Controllers
                             await _userManager.UpdateAsync(role);
                         }
                         return RedirectToAction(nameof(Index));
-                    }    
+                    }
                 }
                 return View(model);
             }

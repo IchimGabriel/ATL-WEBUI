@@ -35,7 +35,7 @@
 @foreach (var item in Model) {
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.RouteName)
+                @Html.DisplayNameFor(modelItem => item.RouteName)
             </th>
             <td>
                 @Html.DisplayFor(modelItem => item.RouteNodes)

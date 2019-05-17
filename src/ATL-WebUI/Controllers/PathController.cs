@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ATL_WebUI.Models;
+﻿using ATL_WebUI.Models;
 using ATL_WebUI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ATL_WebUI.Controllers
 {

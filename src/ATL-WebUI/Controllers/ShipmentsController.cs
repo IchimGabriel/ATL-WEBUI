@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using ATL_WebUI.Data;
+﻿using ATL_WebUI.Data;
 using ATL_WebUI.Models.SQL;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ATL_WebUI.Controllers
 {
@@ -30,7 +28,7 @@ namespace ATL_WebUI.Controllers
             {
                 return RedirectToAction("PageUnauthorise", "Home");
             }
-           
+
             return View(list);
         }
 
@@ -55,6 +53,13 @@ namespace ATL_WebUI.Controllers
         // GET: Shipments/Create
         public IActionResult Create()
         {
+            var users = _context.Users.ToList();
+            var addresses = _context.Addresses.ToList();
+            var routes = _context.Routes.ToList();
+
+            ViewBag.Routes = routes;
+            ViewBag.Addresses = addresses;
+            ViewBag.Users = users;
             return View();
         }
 

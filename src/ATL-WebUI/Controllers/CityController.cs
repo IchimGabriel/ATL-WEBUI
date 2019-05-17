@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ATL_WebUI.Models;
+﻿using ATL_WebUI.Models;
 using ATL_WebUI.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace ATL_WebUI.Controllers
 {
@@ -90,7 +84,7 @@ namespace ATL_WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _client.CreateEdge(link.FromCity, link.ToCity, link.Media, link.Distance, link.Price, link.Emission,link.Speed) ;
+                await _client.CreateEdge(link.FromCity, link.ToCity, link.Media, link.Distance, link.Price, link.Emission, link.Speed);
                 return RedirectToAction(nameof(Index));
             }
             return View();

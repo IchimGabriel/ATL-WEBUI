@@ -29,13 +29,11 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-area="" asp-controller="Home" asp-action="Index">
                 <img src="~/img/logowhite.png" alt="ATL-FF Logo" style="width: 40px" />
                 <div class="sidebar-brand-text mx-3">ATL-FF</div>
             </a>
-
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
@@ -46,32 +44,17 @@
                     <span>Home</span>
                 </a>
             </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Destinations
-            </div>
-
             <!-- Nav Item - Home -->
             <li class="nav-item active">
                 <a class="nav-link" asp-area="" asp-controller="City" asp-action="Index">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Home</span>
+                    <span>Destinations</span>
                 </a>
             </li>
-
-            
-
             <!-- Divider -->
             <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                SQL
-            </div>
             <!-- Nav Item - Pages Collapse Menu Shipments -->
             <li class="nav-item active">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
@@ -94,6 +77,14 @@
                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span>
+                </a>
+            </li>
+
+            <!-- Nav Item -Contact -->
+            <li class="nav-item active">
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">
+                    <i class="fas fa-fw fa-phone-volume"></i>
+                    <span>Contact</span>
                 </a>
             </li>
 
@@ -182,25 +173,6 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
@@ -226,21 +198,6 @@
     <!-- Custom scripts for all pages-->
     <script src="~/js/sb-admin-2.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[]' async defer></script>
-    <script type='text/javascript'>
-        function GetMap() {
-            //var map = new Microsoft.Maps.Map('#myMap', {
-            //    credentials: '',
-            //    center: new Microsoft.Maps.Location(51.50632, -0.12714),
-
-            //    mapTypeId: Microsoft.Maps.MapTypeId.grayscale,
-            //    zoom: 5
-            //});
-
-            //Add your post map load code here.
-        }
-    </script>
     <!--Page level plugins-- >
     <script src="~/vendor/chart.js/Chart.min.js"></script>
 

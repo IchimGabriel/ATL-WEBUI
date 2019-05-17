@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Identity;
-using System.Threading.Tasks;
-using ATL_WebUI.Models.SQL;
+﻿using ATL_WebUI.Models.SQL;
 using Refit;
-using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ATL_WebUI.Services
 {

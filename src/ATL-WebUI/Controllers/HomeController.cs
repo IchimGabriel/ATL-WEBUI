@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using ATL_WebUI.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using ATL_WebUI.Data;
+﻿using ATL_WebUI.Models;
 using ATL_WebUI.Models.SQL;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace ATL_WebUI.Controllers
 {
@@ -29,7 +21,7 @@ namespace ATL_WebUI.Controllers
 
             if (User.IsInRole("Broker"))
             {
-                return View("IndexB", "_LayoutBroker");
+                return View("IndexB", "_LayoutAdmin");
             }
 
             if (User.IsInRole("Customer"))
@@ -47,6 +39,11 @@ namespace ATL_WebUI.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult Contact()
         {
             return View();
         }

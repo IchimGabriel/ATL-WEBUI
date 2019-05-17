@@ -1,24 +1,22 @@
-﻿using System;
+﻿using ATL_WebUI.Models.SQL;
+using Refit;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using ATL_WebUI.Models.SQL;
-using Microsoft.AspNetCore.Mvc;
-using Refit;
 
 namespace ATL_WebUI.Services
 {
     public class ShipmentApiClient : IShipmentApiClient
     {
         private readonly HttpClient _httpClient;
-        
+
         public ShipmentApiClient(HttpClient client)
         {
             _httpClient = client;
         }
 
-        
+
 
         public async Task<List<Container>> GetAllContainersAsync()
         {

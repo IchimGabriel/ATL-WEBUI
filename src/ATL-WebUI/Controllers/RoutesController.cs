@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ATL_WebUI.Data;
+using ATL_WebUI.Models.SQL;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using ATL_WebUI.Data;
-using ATL_WebUI.Models.SQL;
 
 namespace ATL_WebUI.Controllers
 {
-    
+
     public class RoutesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -55,7 +53,7 @@ namespace ATL_WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Route_Id,RouteNodes,Total_KM,Total_CO2,Total_Time")] Route route)
+        public async Task<IActionResult> Create([Bind("Route_Id,RouteNodes,Total_KM,Total_CO2,Total_Time,RouteName")] Route route)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +86,7 @@ namespace ATL_WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Route_Id,RouteNodes,Total_KM,Total_CO2,Total_Time")] Route route)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Route_Id,RouteNodes,Total_KM,Total_CO2,Total_Time,RouteName")] Route route)
         {
             if (id != route.Route_Id)
             {

@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ATL_WebUI.Models.SQL
 {
+    public enum Statuses { VALID, DELIVERED, TRANSIT, FAILURE, RETURNED, CANCELED }
+    
     public class Shipment
     {
-        public enum Statuses { VALID, DELIVERED, TRANSIT, FAILURE, RETURNED, CANCELED }
+        private DateTime dt = DateTime.Now;
 
         [Key]
         public Guid Shipment_Id { get; set; }
@@ -17,6 +17,7 @@ namespace ATL_WebUI.Models.SQL
         public Guid Employee_Id { get; set; }
 
         [Display(Name = "Status")]
+        [EnumDataType(typeof(Statuses))]
         public Statuses Status { get; set; }
 
         [Display(Name = "From Address")]
@@ -25,8 +26,8 @@ namespace ATL_WebUI.Models.SQL
         [Display(Name = "To Address")]
         public Guid Address_To_Id { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime Created_Date { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd  HH:mm}", ApplyFormatInEditMode = true)]
+        public DateTime Created_Date { get { return (dt); }set { dt = value; } }
 
         [Display(Name = "Departure")]
         [DataType(DataType.Date)]

@@ -45,13 +45,13 @@ namespace ATL.WebUI.Tests.SeleniumTests
             _driver = new EdgeDriver();
             try
             {
-                _driver.Navigate().GoToUrl("http://localhost:5005/Home/Privacy");
-                Assert.Equal("Privacy Policy - ATL-FF App", _driver.Title);
+                _driver.Navigate().GoToUrl("http://localhost:5004/Home/Privacy");
+                Assert.Equal("Privacy Policy - ATL-FF", _driver.Title);
             }
             finally
             {
                 _driver.Quit();
-            }   
+            }
         }
 
         [Fact]
@@ -60,7 +60,7 @@ namespace ATL.WebUI.Tests.SeleniumTests
             _driver = new EdgeDriver();
             try
             {
-                _driver.Navigate().GoToUrl("http://localhost:5005/Home/Privacy");
+                _driver.Navigate().GoToUrl("http://localhost:5004/Home/Privacy");
                 Assert.NotEqual("Policy - ATL-FF App", _driver.Title);
             }
             finally
