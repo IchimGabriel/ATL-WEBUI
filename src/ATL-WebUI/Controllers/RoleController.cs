@@ -1,4 +1,5 @@
 ﻿using ATL_WebUI.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ATL_WebUI.Controllers
 {
+    [Authorize]
     public class RoleController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -15,9 +17,14 @@ namespace ATL_WebUI.Controllers
             _context = context;
             _roleManager = roleManager;
         }
-        // GET: Role
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
+            if (!User.Identity.IsAuthenticated && (!User.IsInRole("Admin")))
+            {
+                return RedirectToAction("PageUnauthorise", "Home");
+            }
             var roles = _context.Roles.ToList();
             if (roles != null)
             {
@@ -26,14 +33,18 @@ namespace ATL_WebUI.Controllers
             return RedirectToAction(nameof(Create));
         }
 
-        // GET: Role/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
+            if (!User.Identity.IsAuthenticated && (!User.IsInRole("Admin")))
+            {
+                return RedirectToAction("PageUnauthorise", "Home");
+            }
             return View();
         }
 
-        // POST: Role/Create
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(IdentityRole role)
         {

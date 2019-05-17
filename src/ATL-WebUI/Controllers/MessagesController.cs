@@ -1,5 +1,6 @@
 ﻿using ATL_WebUI.Data;
 using ATL_WebUI.Models.SQL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,29 +17,27 @@ namespace ATL_WebUI.Controllers
         {
             _context = context;
         }
-
-        // GET: Messages
-        public async Task<IActionResult> Index()
+        /// <summary>
+        /// Return all messages for a Shipment
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Authorize(Roles = "Customer")]
+        public async Task<IActionResult> Index(Guid id)
         {
-            return View(await _context.Messages.ToListAsync());
-        }
+            if (!User.Identity.IsAuthenticated && (!User.IsInRole("Customer")))
+            {
+                return RedirectToAction("PageUnauthorise", "Home");
+            }
 
-        // GET: Messages/Details/5
-        public async Task<IActionResult> Details(Guid? id)
-        {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var message = await _context.Messages
-                .FirstOrDefaultAsync(m => m.Message_Id == id);
-            if (message == null)
-            {
-                return NotFound();
-            }
+            var messages = await _context.Messages.Where(m => m.Shipment_Id == id).ToListAsync();
 
-            return View(message);
+            return View(messages);
         }
 
         // GET: Messages/Create
@@ -62,91 +61,6 @@ namespace ATL_WebUI.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(message);
-        }
-
-        // GET: Messages/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var message = await _context.Messages.FindAsync(id);
-            if (message == null)
-            {
-                return NotFound();
-            }
-            return View(message);
-        }
-
-        // POST: Messages/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Message_Id,Shipment_Id,Details")] Message message)
-        {
-            if (id != message.Message_Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(message);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MessageExists(message.Message_Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(message);
-        }
-
-        // GET: Messages/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var message = await _context.Messages
-                .FirstOrDefaultAsync(m => m.Message_Id == id);
-            if (message == null)
-            {
-                return NotFound();
-            }
-
-            return View(message);
-        }
-
-        // POST: Messages/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
-        {
-            var message = await _context.Messages.FindAsync(id);
-            _context.Messages.Remove(message);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool MessageExists(Guid id)
-        {
-            return _context.Messages.Any(e => e.Message_Id == id);
         }
     }
 }

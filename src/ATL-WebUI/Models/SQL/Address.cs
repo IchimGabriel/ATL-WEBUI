@@ -10,9 +10,11 @@ namespace ATL_WebUI.Models.SQL
         public Guid User_Id { get; set; }
 
         [MaxLength(100)]
+        [Display(Name = "Adress (Nr / Street)")]
         public string Field_1 { get; set; }
 
         [MaxLength(100)]
+        [Display(Name = "Name (Port / Warehouse)")]
         public string Field_2 { get; set; }
 
         [MaxLength(100)]

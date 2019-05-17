@@ -16,13 +16,13 @@ namespace ATL_WebUI.Services
         //[Get("/api/addresses")]
         //Task<List<Address>> GetAllAddressesAsync();
 
-        [Get("/containers")]
+        [Get("/api/containers")]
         Task<List<Container>> GetAllContainersAsync();
 
-        [Get("/containers/{id}")]
+        [Get("/api/containers/{id}")]
         Task<Container> EditContainer(Guid? id);
 
-        [Put("/containers/{id}")]
+        [Put("/api/containers/{id}")]
         Task<Container> SaveEdit(Guid? id, [Body]Container container);
     }
 }

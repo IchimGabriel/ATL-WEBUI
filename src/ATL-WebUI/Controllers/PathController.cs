@@ -1,5 +1,6 @@
 ﻿using ATL_WebUI.Models;
 using ATL_WebUI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace ATL_WebUI.Controllers
 {
+    [Authorize]
     public class PathController : Controller
     {
         private readonly INeo4jApiClient _client;
@@ -29,6 +31,7 @@ namespace ATL_WebUI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Authorize(Roles = "Admin, Broker")]
         public IActionResult OnGet()
         {
             //_logger.LogInformation("Input params...");
@@ -44,11 +47,12 @@ namespace ATL_WebUI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [Authorize(Roles = "Admin, Broker")]
         public async Task<IActionResult> OnPostAsync()
         {
             var result = await _client.GetSPath(Input.DepartureCity, Input.ArrivalCity, Input.Media, Input.NoNodes);
 
-            ViewBag.Media = Input.Media.ToLower();
+            ViewBag.Media = Input.Media.ToUpper();
 
             return View(result);
         }

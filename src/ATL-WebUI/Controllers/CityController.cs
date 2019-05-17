@@ -1,10 +1,12 @@
 ﻿using ATL_WebUI.Models;
 using ATL_WebUI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace ATL_WebUI.Controllers
 {
+    [Authorize]
     public class CityController : Controller
     {
         private readonly INeo4jApiClient _client;
@@ -17,7 +19,6 @@ namespace ATL_WebUI.Controllers
         /// GET: Cities
         /// </summary>
         /// <returns>List of all CITIES in Neo4j DB</returns>
-        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var cities = await _client.GetAllCitiesAsync();
@@ -29,6 +30,7 @@ namespace ATL_WebUI.Controllers
         /// </summary>
         /// <returns>List of Neighbour city conected by truck</returns>
         [HttpGet]
+        [Authorize(Roles = "Admin, Broker")]
         public async Task<IActionResult> GetNeighbours()
         {
             var cities = await _client.TruckConnectedCityNeighbours();
@@ -42,6 +44,7 @@ namespace ATL_WebUI.Controllers
         /// GET: City/Create
         /// </summary>
         /// <returns>Imput new City Parameters</returns>
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -68,6 +71,7 @@ namespace ATL_WebUI.Controllers
         /// GET: City/CreateLink
         /// </summary>
         /// <returns>Imput form for Cities to link</returns>
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateLink()
         {
             return View();

@@ -80,9 +80,6 @@
                 @Html.DisplayFor(modelItem => item.Route_Id)
             </td>
             <td>
-                @*<a asp-action="Edit" asp-route-id="@item.Shipment_Id">Edit</a> |
-        <a asp-action="Details" asp-route-id="@item.Shipment_Id">Details</a> |*@
-
                 <a asp-controller="Details" asp-action="Create" asp-route-id="@item.Shipment_Id" class="btn btn-primary">Create Cargo</a>
                 <hr />
                 <a asp-action="Details" asp-route-id="@item.Shipment_Id" class="btn btn-primary">Details</a>

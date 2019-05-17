@@ -27,12 +27,9 @@ namespace ATL_WebUI.Controllers
         /// Implements the API - Route => api/containers
         /// </summary>
         /// <returns></returns>
-        // GET: Containers
-
-
         public async Task<IActionResult> Index()
         {
-            if (User.Identity.IsAuthenticated || User.IsInRole("Admin"))
+            if (User.Identity.IsAuthenticated)
             {
                 return View(await _client.GetAllContainersAsync());
             }
@@ -40,33 +37,11 @@ namespace ATL_WebUI.Controllers
             return Unauthorized();
         }
 
-        //GET: Containers/Details/3af6eb9b-bf45-46e9-94c5-26e6ad69ecf2
-        public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var container = await _context.Containers
-                .FirstOrDefaultAsync(m => m.Unit_Id == id);
-            if (container == null)
-            {
-                return NotFound();
-            }
-
-            return View(container);
-        }
-
-        // GET: Containers/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Containers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Unit_Id,Name, Description")] Container container)
@@ -81,7 +56,6 @@ namespace ATL_WebUI.Controllers
             return View(container);
         }
 
-        // GET: Containers/Edit/3af6eb9b-bf45-46e9-94c5-26e6ad69ecf2
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -98,9 +72,6 @@ namespace ATL_WebUI.Controllers
             return View(container);
         }
 
-        // POST: Containers/Edit/3af6eb9b-bf45-46e9-94c5-26e6ad69ecf2
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("Unit_Id,Name, Description")] Container container)
@@ -118,7 +89,7 @@ namespace ATL_WebUI.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ContainerExists(container.Unit_Id))
+                    if (container.Unit_Id != null)
                     {
                         return NotFound();
                     }
@@ -130,40 +101,6 @@ namespace ATL_WebUI.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(container);
-        }
-
-        // GET: Containers/Delete/3af6eb9b-bf45-46e9-94c5-26e6ad69ecf2
-        public async Task<IActionResult> Delete(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var container = await _context.Containers
-                .FirstOrDefaultAsync(m => m.Unit_Id == id);
-            if (container == null)
-            {
-                return NotFound();
-            }
-
-            return View(container);
-        }
-
-        // POST: Containers/Delete/3af6eb9b-bf45-46e9-94c5-26e6ad69ecf2
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
-        {
-            var container = await _context.Containers.FindAsync(id);
-            _context.Containers.Remove(container);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool ContainerExists(Guid id)
-        {
-            return _context.Containers.Any(e => e.Unit_Id == id);
         }
     }
 }

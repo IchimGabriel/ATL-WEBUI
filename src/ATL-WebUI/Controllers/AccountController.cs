@@ -1,5 +1,6 @@
 ﻿using ATL_WebUI.Data;
 using ATL_WebUI.Models.SQL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace ATL_WebUI.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,14 +25,14 @@ namespace ATL_WebUI.Controllers
             _roleManager = roleManager;
         }
 
-        // GET: Account
+        [Authorize(Roles = "Admin, Broker")]
         public ActionResult Index()
         {
             var users = _context.Users.ToList();
             return View(users);
         }
 
-        // GET: Account/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             var roles = _context.Roles.ToList();
@@ -38,8 +40,16 @@ namespace ATL_WebUI.Controllers
             return View();
         }
 
-        // POST: Account/Create
+        [Authorize(Roles = "Broker")]
+        public ActionResult CreateCustomer()
+        {
+            var role = _context.Roles.FirstOrDefault(c => c.Name == "Customer");
+            ViewBag.Name = role;
+            return View();
+        }
+
         [HttpPost]
+        [Authorize(Roles = "Admin, Broker")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(RegisterViewModel model)
         {

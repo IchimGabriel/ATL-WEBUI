@@ -1,5 +1,6 @@
 ﻿using ATL_WebUI.Data;
 using ATL_WebUI.Models.SQL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ATL_WebUI.Controllers
 {
-
+    [Authorize]
     public class RoutesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -18,40 +19,31 @@ namespace ATL_WebUI.Controllers
             _context = context;
         }
 
-        // GET: Routes
+        [Authorize(Roles = "Admin, Broker")]
         public async Task<IActionResult> Index()
         {
+            if (!User.Identity.IsAuthenticated && (!User.IsInRole("Admin") || !User.IsInRole("Broker")))
+            {
+                return RedirectToAction("PageUnauthorise", "Home");
+            }
+
             return View(await _context.Routes.ToListAsync());
         }
 
-        // GET: Routes/Details/5
-        public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var route = await _context.Routes
-                .FirstOrDefaultAsync(m => m.Route_Id == id);
-            if (route == null)
-            {
-                return NotFound();
-            }
-
-            return View(route);
-        }
-
-        // GET: Routes/Create
+        [Authorize(Roles = "Broker")]
         public IActionResult Create()
         {
+            if (!User.Identity.IsAuthenticated && (!User.IsInRole("Broker")))
+            {
+                return RedirectToAction("PageUnauthorise", "Home");
+            }
+
             return View();
         }
 
-        // POST: Routes/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
+        [Authorize(Roles = "Broker")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Route_Id,RouteNodes,Total_KM,Total_CO2,Total_Time,RouteName")] Route route)
         {
@@ -63,91 +55,6 @@ namespace ATL_WebUI.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(route);
-        }
-
-        // GET: Routes/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var route = await _context.Routes.FindAsync(id);
-            if (route == null)
-            {
-                return NotFound();
-            }
-            return View(route);
-        }
-
-        // POST: Routes/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Route_Id,RouteNodes,Total_KM,Total_CO2,Total_Time,RouteName")] Route route)
-        {
-            if (id != route.Route_Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(route);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RouteExists(route.Route_Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(route);
-        }
-
-        // GET: Routes/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var route = await _context.Routes
-                .FirstOrDefaultAsync(m => m.Route_Id == id);
-            if (route == null)
-            {
-                return NotFound();
-            }
-
-            return View(route);
-        }
-
-        // POST: Routes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
-        {
-            var route = await _context.Routes.FindAsync(id);
-            _context.Routes.Remove(route);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool RouteExists(Guid id)
-        {
-            return _context.Routes.Any(e => e.Route_Id == id);
         }
     }
 }

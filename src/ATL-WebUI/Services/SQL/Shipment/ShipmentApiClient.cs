@@ -20,21 +20,21 @@ namespace ATL_WebUI.Services
 
         public async Task<List<Container>> GetAllContainersAsync()
         {
-            var response = await _httpClient.GetAsync("/containers");
+            var response = await _httpClient.GetAsync("/api/containers");
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsJsonAsync<List<Container>>();
         }
 
         public async Task<Container> EditContainer(Guid? id)
         {
-            var response = await _httpClient.GetAsync("/containers/" + id);
+            var response = await _httpClient.GetAsync("/api/containers/" + id);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsJsonAsync<Container>();
         }
 
         public async Task<Container> SaveEdit(Guid? id, [Body]Container container)
         {
-            var response = await _httpClient.PutAsync("/containers/" + id, null);
+            var response = await _httpClient.PutAsync("/api/containers/" + id, null);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsJsonAsync<Container>();
         }

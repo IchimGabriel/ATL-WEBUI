@@ -21,7 +21,7 @@ namespace ATL_WebUI.Controllers
 
             if (User.IsInRole("Broker"))
             {
-                return View("IndexB", "_LayoutAdmin");
+                return View("IndexA", "_LayoutAdmin");
             }
 
             if (User.IsInRole("Customer"))

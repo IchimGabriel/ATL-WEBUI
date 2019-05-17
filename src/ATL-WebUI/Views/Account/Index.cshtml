@@ -1,12 +1,22 @@
 ﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Users";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <hr />
 <h4 class="m-0 font-weight-bold text-primary">Users</h4><hr /><hr />
-<p><a asp-action="Create" class="btn btn-primary btn-lg">Add User</a></p><hr /><br />
+@if (User.Identity.IsAuthenticated)
+{
+    @if (User.IsInRole("Admin"))
+    {
+        <p><a asp-action="Create" class="btn btn-primary btn-lg">Add User</a></p>
+    }
+    @if (User.IsInRole("Broker"))
+	{
+        <p><a asp-action="CreateCustomer" class="btn btn-primary btn-lg">Add User</a></p>        
+	}
+}
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">All Application Users</h6>

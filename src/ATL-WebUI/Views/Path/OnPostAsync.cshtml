@@ -10,7 +10,6 @@
 <hr />
 <div id="myMap" style='position:relative;width:100%;height:100%;'>
     <div class="">
-
         @foreach (var item in Model)
         {
             <span>&nbsp; &nbsp;</span>
@@ -32,7 +31,9 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     Distance:  @item.Values.TravelDistance  Km
                                 </div>
-                                    <a asp-action="Save" asp-route-id="@item.Values.Cities">Save</a> |   
+                                @ViewBag.Counter + 1
+                                <hr />  
+                                <a asp-controller="Routes" asp-action="Create" class="btn btn-primary">Create Cargo</a>  
                             </div>
                         </div>
                     </div>

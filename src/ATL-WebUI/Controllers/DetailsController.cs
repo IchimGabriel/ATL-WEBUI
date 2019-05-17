@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ATL_WebUI.Data;
 using ATL_WebUI.Models.SQL;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ATL_WebUI.Controllers
 {
+    [Authorize]
     public class DetailsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,11 +23,13 @@ namespace ATL_WebUI.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Broker")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Details.ToListAsync());
         }
 
+        [Authorize(Roles = "Broker")]
         public IActionResult Create(Guid? id)
         {
             if (id == null)
