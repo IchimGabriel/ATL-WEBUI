@@ -6,17 +6,13 @@
 }
 
 <h1>Messages</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<hr />
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Details)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -24,11 +20,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Details)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Message_Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Message_Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Message_Id">Delete</a>
             </td>
         </tr>
 }

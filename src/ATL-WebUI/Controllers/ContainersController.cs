@@ -56,6 +56,11 @@ namespace ATL_WebUI.Controllers
             return View(container);
         }
 
+        /// <summary>
+        /// Edit using API -> api/containers/edit/id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -72,6 +77,12 @@ namespace ATL_WebUI.Controllers
             return View(container);
         }
 
+
+        /// <summary>
+        /// Edit using API -> api/containers/edit/id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("Unit_Id,Name, Description")] Container container)

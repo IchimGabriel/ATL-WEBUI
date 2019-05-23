@@ -57,12 +57,12 @@ namespace ATL_WebUI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var user = new IdentityUser { Id = Guid.NewGuid().ToString(), UserName = model.UserName, Email = model.Email, PhoneNumber = model.Phone };
+                    var user = new IdentityUser { Id = Guid.NewGuid().ToString(), UserName = model.UserName, Email = model.UserName, PhoneNumber = model.Phone };
                     var result = await _userManager.CreateAsync(user, model.Password);
 
                     if (result.Succeeded)
                     {
-                        var role = await _userManager.FindByEmailAsync(model.Email);
+                        var role = await _userManager.FindByEmailAsync(model.UserName);
                         if (!await _userManager.IsInRoleAsync(role, model.UserRoles))
                         {
                             await _userManager.AddToRoleAsync(role, model.UserRoles);

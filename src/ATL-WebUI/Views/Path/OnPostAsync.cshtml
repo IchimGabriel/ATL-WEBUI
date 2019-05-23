@@ -1,7 +1,16 @@
 ﻿@model IEnumerable<ShortestPath>
+
 @{
     ViewData["Title"] = "OnPostAsync";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@{ 
+    var parms = new Dictionary<string, string>
+            {
+                { "RouteName", "ex. Dublin / Liverpool - MEDIA" },
+                { "RouteNodes", "ex. Dublin Belfast etc." },
+            };
 }
 
 <hr />
@@ -9,31 +18,39 @@
 <hr />
 <hr />
 <div id="myMap" style='position:relative;width:100%;height:100%;'>
-    <div class="">
+    <div>
         @foreach (var item in Model)
         {
-            <span>&nbsp; &nbsp;</span>
-            @item.Values.Cities[0].ToString()
-            <span>&nbsp; - &nbsp;</span>
-            @item.Values.Cities[@item.Values.Cities.Count - 1].ToString()
-
+            <p>
+                <span>&nbsp; &nbsp;</span>
+                @item.Values.Cities[0].ToString()
+                <span>&nbsp; / &nbsp;</span>
+                @item.Values.Cities[@item.Values.Cities.Count - 1].ToString()
+                <span>&nbsp; - &nbsp;</span>
+                @ViewBag.Media
+            </p>
             <div class="col-xl-6 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                @foreach (var itemv in item.Values.Cities)
-                                {
-                                    @itemv <span>&nbsp; &nbsp;</span>
-                                }
+                                <div class="form-group">
+                                    <p>
+                                        @foreach (var itemv in item.Values.Cities)
+                                        {
+                                            @itemv <span>&nbsp; &nbsp;</span>
+                                        }
+                                    </p>
+                                </div>
                                 <div></div>
                                 <br />
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    Distance:  @item.Values.TravelDistance  Km
+                                    Distance:  @item.Values.TravelDistance Km
                                 </div>
-                                @ViewBag.Counter + 1
-                                <hr />  
-                                <a asp-controller="Routes" asp-action="Create" class="btn btn-primary">Create Cargo</a>  
+                                <div class="form-group">
+                                    <hr />
+                                    <a class="btn btn-primary" asp-controller="Routes" asp-action="Create" asp-all-route-data="parms" target="_blank">Add Route</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -42,4 +59,3 @@
         }
     </div>
 </div>
-

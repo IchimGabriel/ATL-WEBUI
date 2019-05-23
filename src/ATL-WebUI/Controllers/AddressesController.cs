@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace ATL_WebUI.Controllers
 {
+    [Produces("application/json")]
     [Authorize(Roles = "Admin, Broker")]
     public class AddressesController : Controller
     {

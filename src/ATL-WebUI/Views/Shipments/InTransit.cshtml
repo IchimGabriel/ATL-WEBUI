@@ -1,0 +1,90 @@
+﻿@model IEnumerable<ATL_WebUI.Models.SQL.Shipment>
+
+@{
+    ViewData["Title"] = "Shipments In Transit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Shipments In Transit</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address_From_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address_To_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Created_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departure_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Arrival_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total_Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Route_Id)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address_From_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address_To_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Created_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Departure_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Arrival_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total_Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Route_Id)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Shipment_Id" class="btn btn-primary">Details</a>
+                    <hr />
+                    @Html.ActionLink("DELIVERED", "Delivered", new { id = item.Shipment_Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

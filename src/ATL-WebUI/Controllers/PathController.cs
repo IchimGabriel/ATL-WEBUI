@@ -53,8 +53,10 @@ namespace ATL_WebUI.Controllers
             var result = await _client.GetSPath(Input.DepartureCity, Input.ArrivalCity, Input.Media, Input.NoNodes);
 
             ViewBag.Media = Input.Media.ToUpper();
-
+            
             return View(result);
         }
     }
+
+
 }

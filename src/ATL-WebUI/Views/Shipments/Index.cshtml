@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<ATL_WebUI.Models.SQL.Shipment>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Shipments Valid";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Index</h1>
+<h1>All Shipments - Valid</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-primary">Create New</a>
@@ -83,6 +83,8 @@
                 <a asp-controller="Details" asp-action="Create" asp-route-id="@item.Shipment_Id" class="btn btn-primary">Create Cargo</a>
                 <hr />
                 <a asp-action="Details" asp-route-id="@item.Shipment_Id" class="btn btn-primary">Details</a>
+                <hr />
+                @Html.ActionLink("TRANSIT", "Transit", new { id = item.Shipment_Id })
             </td>
         </tr>
 }

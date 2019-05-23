@@ -10,7 +10,7 @@ namespace ATL.WebUI.Tests.SeleniumTests
     /// </summary>
     public class WebDriverPageTests
     {
-        private IWebDriver _driver;
+        public IWebDriver _driver;
 
         [Theory]
         [InlineData("Edge")]

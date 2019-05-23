@@ -6,13 +6,8 @@ namespace ATL_WebUI.Models.SQL
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "User Name")]
+        [Display(Name = "User Name (Email)")]
         public string UserName { get; set; }
-
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
 
         [Required]
         [Phone]
