@@ -23,6 +23,21 @@ namespace ATL_WebUI.Controllers
             _userManager = userManager;
         }
 
+        public async Task<IActionResult> UserShipments()
+        {
+            var userName = User.Identity.Name;
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName);
+            
+            var list = await _context.Shipments.Where(s => s.Customer_Id.ToString() == user.Id.ToString()).OrderByDescending(o => o.Created_Date).ToListAsync();
+
+            if (!User.Identity.IsAuthenticated && !User.IsInRole("Customer"))
+            {
+                return RedirectToAction("PageUnauthorise", "Home");
+            }
+
+            return View(list);
+        }
+
         /// <summary>
         /// VALID Shipments List
         /// </summary>
@@ -68,13 +83,14 @@ namespace ATL_WebUI.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [Authorize(Roles = "Admin, Broker, Customer")]
+        //[Authorize(Roles = "Admin, Broker, Customer")]
+        [AllowAnonymous]
         public async Task<IActionResult> Details(Guid? id)
         {
-            if (!User.Identity.IsAuthenticated && (!User.IsInRole("Admin") || !User.IsInRole("Broker")))
-            {
-                return RedirectToAction("PageUnauthorise", "Home");
-            }
+            //if (!User.Identity.IsAuthenticated && (!User.IsInRole("Admin") || !User.IsInRole("Broker")))
+            //{
+            //    return RedirectToAction("PageUnauthorise", "Home");
+            //}
 
             if (id == null)
             {

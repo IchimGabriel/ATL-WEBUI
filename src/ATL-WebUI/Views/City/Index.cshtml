@@ -5,7 +5,14 @@
 }
 <hr />
 <h4 class="m-0 font-weight-bold text-primary">List of Cities</h4><hr /><hr />
-<p><a asp-action="Create" class="btn btn-primary btn-lg">Create City</a> | <a asp-action="CreateLink" class="btn btn-primary btn-lg">Create Link</a></p><hr /><br />
+@if (User.Identity.IsAuthenticated)
+{
+    @if (User.IsInRole("Admin") || User.IsInRole("Broker"))
+    {
+        <p><a asp-action="Create" class="btn btn-primary btn-lg">Create City</a> | <a asp-action="CreateLink" class="btn btn-primary btn-lg">Create Link</a></p>
+    }
+}
+<hr /><br />
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Map Nodes</h6>

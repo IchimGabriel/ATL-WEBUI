@@ -63,11 +63,7 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-area="" asp-controller="Shipments" asp-action="Index">Shipment's List</a>
-                        <a class="collapse-item" asp-area="" asp-controller="Containers" asp-action="Index">Container's List</a>
-                        <a class="collapse-item" asp-area="" asp-controller="Addresses" asp-action="Index">Dispatch Locations</a>
-                        <a class="collapse-item" asp-area="" asp-controller="Home" asp-action="Index">Failure</a>
-                        <a class="collapse-item" asp-area="" asp-controller="Home" asp-action="Index">Returned</a>
+                        <a class="collapse-item" asp-area="" asp-controller="Shipments" asp-action="UserShipments">Shipment's List</a>
                     </div>
                 </div>
             </li>
@@ -111,6 +107,12 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
+                    <form asp-action="Details" asp-controller="Shipments" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" name="id" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="submit" value="Search" class="btn btn-secondary" />
+                        </div>
+                    </form>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -198,12 +200,7 @@
     <!-- Custom scripts for all pages-->
     <script src="~/js/sb-admin-2.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <!--Page level plugins-- >
-    <script src="~/vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    @*<script src="~/js/chart-area-demo.js"></script>
-        <script src="~/js/chart-pie-demo.js"></script>*@
+   
 
     @RenderSection("Scripts", required: false)
 </body>

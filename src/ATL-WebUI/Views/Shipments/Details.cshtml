@@ -11,7 +11,7 @@
     <div class="card shadow mb-4">
         <!-- Card Header -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Shipment Info</h6>    
+            <h6 class="m-0 font-weight-bold text-primary">Shipment Info</h6>
         </div>
         <!-- Card Body -->
         <div class="card-body">
@@ -106,12 +106,12 @@
                                 <div class="progress mb-4">
                                     <div class="progress-bar bg-danger" role="progressbar" style="width: @((ViewBag.Route.Total_CO2 * 100)/20000)%" aria-valuenow="@((ViewBag.Route.Total_CO2 * 100)/20000)" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                
+
                                 <h4 class="small font-weight-bold">Cost / KM<span class="float-right">@((ViewBag.Route.Total_KM * 100) / 10000)%</span></h4>
                                 <div class="progress mb-4">
                                     <div class="progress-bar bg-warning" role="progressbar" style="width: @((ViewBag.Route.Total_KM * 100) / 10000)%" aria-valuenow="@((ViewBag.Route.Total_KM * 100) / 10000)" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                
+
                                 <h4 class="small font-weight-bold">Time Value<span class="float-right">@((ViewBag.Route.Total_Time * 100) / 50)%</span></h4>
                                 <div class="progress mb-4">
                                     <div class="progress-bar" role="progressbar" style="width: @((ViewBag.Route.Total_Time * 100) / 50)%" aria-valuenow="@((ViewBag.Route.Total_Time * 100) / 50)" aria-valuemin="0" aria-valuemax="100"></div>
@@ -134,9 +134,16 @@
                     </div>
                 </div>
                 <hr />
-                <p>@Html.ActionLink("Back to List", "Index", "Shipments", null, new { @class = "btn btn-primary" })</p>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @if (User.IsInRole("Admin") ||User.IsInRole("Broker"))
+                    {
+                        <p>@Html.ActionLink("Back to List", "Index", "Shipments", null, new { @class = "btn btn-primary" })</p>
+                    }
+                } 
             </div>
         </div>
     </div>
 </div>
+
 

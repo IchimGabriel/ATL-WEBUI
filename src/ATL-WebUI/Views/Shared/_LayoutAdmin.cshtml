@@ -163,6 +163,13 @@
                     </li>
                 }
             }
+
+            <li class="nav-item active">
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">
+                    <i class="fas fa-fw fa-phone-volume"></i>
+                    <span>Contact</span>
+                </a>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
             <!-- Sidebar Toggler (Sidebar) -->
@@ -181,6 +188,13 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
+                    <!-- Topbar Search -->
+                    <form asp-action="Details" asp-controller="Shipments" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" name="id" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="submit" value="Search" class="btn btn-secondary" />
+                        </div>
+                    </form>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
@@ -254,16 +268,15 @@
                 integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
         </script>
     </environment>
-
     <!-- Core plugin JavaScript-->
     <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="~/js/sb-admin-2.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>  
-    @*<!--Page level plugins-- >
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- Page level custom scripts -->
     <script src="~/vendor/chart.js/Chart.min.js"></script>
-    <!-- Page level custom scripts --><script src="~/js/chart-area-demo.js"></script>
-        <script src="~/js/chart-pie-demo.js"></script>*@
+    <script src="~/js/chart-area-demo.js"></script>
+    <script src="~/js/chart-pie-demo.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

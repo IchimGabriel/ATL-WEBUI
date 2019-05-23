@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ATL_WebUI.Models.SQL.Shipment>
+
+@{
+    ViewData["Title"] = "User Shipments";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h1>All Shipments</h1>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Created_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departure_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Arrival_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total_Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Departure_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Arrival_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total_Price)
+            </td>
+            <td> 
+                <a asp-action="Details" asp-route-id="@item.Shipment_Id" class="btn btn-primary">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
