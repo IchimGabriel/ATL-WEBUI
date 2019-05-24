@@ -18,7 +18,7 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
 
-ENV ASPNETCORE_URLS http://*:5001
+ENV ASPNETCORE_URLS http://*:5004
 ENV ASPNETCORE_ENVIRONMENT docker
-EXPOSE 5001
+EXPOSE 5004
 ENTRYPOINT ["dotnet", "ATL-WebUI.dll"]

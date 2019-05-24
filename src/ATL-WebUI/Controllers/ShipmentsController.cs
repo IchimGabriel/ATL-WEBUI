@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +19,13 @@ namespace ATL_WebUI.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly IConfiguration _configuration;
 
-        public ShipmentsController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public ShipmentsController(ApplicationDbContext context, UserManager<IdentityUser> userManager, IConfiguration configuration)
         {
             _context = context;
             _userManager = userManager;
+            _configuration = configuration;
         }
 
         public async Task<IActionResult> UserShipments()
@@ -152,7 +157,23 @@ namespace ATL_WebUI.Controllers
             var user = await _context.Users.FirstOrDefaultAsync(c => c.Id == shipment.Customer_Id.ToString());
             var route = await _context.Routes.FirstOrDefaultAsync(r => r.Route_Id == shipment.Route_Id);
 
-            var message = $"Shipment: {shipment.Shipment_Id} is now in TRANSIT. Arrival Date: {shipment.Arrival_Date} has not been changed."
+            //send message to customer
+            var client = new SendGridClient("");
+            var msg = new SendGridMessage();
+            msg.SetFrom(new EmailAddress("ichimgabriel75@gmail.com", "ATL-FF"));
+
+            var recepients = new List<EmailAddress>
+            {
+                new EmailAddress("ichimgabriel75@gmail.com"),
+                new EmailAddress(user.Email.ToString())
+            };
+            msg.AddTos(recepients);
+            msg.SetSubject("Shipment in Transit");
+            msg.AddContent(MimeType.Text, $"Shipment: {shipment.Shipment_Id} - is now in TRANSIT. Arrival Date: {shipment.Arrival_Date} has not been changed.");
+            await client.SendEmailAsync(msg);
+
+            //save message in db
+            var message = $"2. Shipment: {shipment.Shipment_Id} is now in TRANSIT. Arrival Date: {shipment.Arrival_Date} has not been changed."
                 + $" On Route: {route.RouteNodes}. User {user.Email} has been notify.";
 
             var addMessage = new Message()
@@ -191,7 +212,23 @@ namespace ATL_WebUI.Controllers
             var user = await _context.Users.FirstOrDefaultAsync(c => c.Id == shipment.Customer_Id.ToString());
             var route = await _context.Routes.FirstOrDefaultAsync(r => r.Route_Id == shipment.Route_Id);
 
-            var message = $"Shipment: {shipment.Shipment_Id} is now DELIVERED. Arrival Date: {shipment.Arrival_Date} has not been changed."
+            //send message to customer
+            var client = new SendGridClient(" ");
+            var msg = new SendGridMessage();
+            msg.SetFrom(new EmailAddress("ichimgabriel75@gmail.com", "ATL-FF"));
+
+            var recepients = new List<EmailAddress>
+            {
+                new EmailAddress("ichimgabriel75@gmail.com"),
+                new EmailAddress(user.Email.ToString())
+            };
+            msg.AddTos(recepients);
+            msg.SetSubject("Shipment Delivered");
+            msg.AddContent(MimeType.Text, $"Shipment: {shipment.Shipment_Id} - Delivered.");
+            await client.SendEmailAsync(msg);
+
+            //save message in db
+            var message = $"3. Shipment: {shipment.Shipment_Id} - DELIVERED. Arrival Date: {shipment.Arrival_Date} has not been changed."
                 + $" User {user.Email} has been notify.";
 
             var addMessage = new Message()
@@ -250,8 +287,26 @@ namespace ATL_WebUI.Controllers
                 var user = await _context.Users.FirstOrDefaultAsync(c => c.Id == shipment.Customer_Id.ToString());
                 var route = await _context.Routes.FirstOrDefaultAsync(r => r.Route_Id == shipment.Route_Id);
 
-                var message = $"Shipment created {shipment.Created_Date} is VALID. Departure Date: {shipment.Departure_Date} - Arrival Date: {shipment.Arrival_Date}." 
-                    + $" Is set for Route: {route.RouteNodes}. User {user.Email} has been notify.";
+                //send message to customer
+                var client = new SendGridClient("");
+                var msg = new SendGridMessage();
+                msg.SetFrom(new EmailAddress("ichimgabriel75@gmail.com", "ATL-FF"));
+
+                var recepients = new List<EmailAddress>
+            {
+                new EmailAddress("ichimgabriel75@gmail.com"),
+                new EmailAddress(user.Email.ToString())
+            };
+                msg.AddTos(recepients);
+                msg.SetSubject("Shipment Created");
+                msg.AddContent(MimeType.Text, $"Shipment: {shipment.Shipment_Id} - has been created." 
+                + $"Departure Date: {shipment.Departure_Date} - Arrival Date: {shipment.Arrival_Date}."
+                + $"Is set for Route: {route.RouteNodes}.");
+                await client.SendEmailAsync(msg);
+
+                //save message in db
+                var message = $"1. Shipment created {shipment.Created_Date} is VALID. Departure Date: {shipment.Departure_Date} - Arrival Date: {shipment.Arrival_Date}." 
+                    + $"Is set for Route: {route.RouteNodes}. User {user.Email} has been notify.";
 
                 var addMessage = new Message()
                 {
